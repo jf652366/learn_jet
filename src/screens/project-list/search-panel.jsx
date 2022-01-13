@@ -1,39 +1,20 @@
-import {useCallback, useEffect, useMemo, useState} from "react";
 
-export  const SearchPanel = () => {
-    const [param,setParam]=useState({
-        name:'',
-        personID:''
-    })
-    const [users,setIsers]=useState([]);
-    const [list,setList]=useState([])
-    useEffect(()=>{
-        fetch('').then(async response=>{
-            if (response.ok){
-                setList(await response.json())
-            }
-        })
-    })
-    useCallback(()=>{
 
-    },[])
-    useMemo(()=>{
-
-    },[])
+export  const SearchPanel = ({param,setParam,users}) => {
 
     return <form>
         <input type='text' value={param.name} onChange={evt=>setParam({
             ...param,name: evt.target.value
         })
         }/>
-        <select value={param.personID} onChange={evt=>setParam({
-            ...param,personID: evt.target.value
+        <select value={param.personId} onChange={evt=>setParam({
+            ...param,personId: evt.target.value
         })}>
             <option value={''}>
                 负责人
             </option>
             {
-                users.map(user=><option value={user.id}>{user.name}</option>)
+                users.map(user=><option key={user.id} value={user.id}>{user.name}</option>)
             }
         </select>
     </form>
