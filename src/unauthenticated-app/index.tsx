@@ -3,7 +3,7 @@ import { LoginScreen } from "./login";
 import { RegisterScreen } from "./register";
 
 export const UnauthenticatedApp = () => {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
   return (
     <div>
       {isLogin ? <LoginScreen /> : <RegisterScreen />}
