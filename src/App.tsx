@@ -1,7 +1,6 @@
 import React from "react";
 
-// import { Try } from "./screens/try";
-
+import "./App.css";
 import { useAuth } from "./context/auth-context";
 import { UnauthenticatedApp } from "./unauthenticated-app";
 import { AuthenticatedApp } from "./authenticated-app";
