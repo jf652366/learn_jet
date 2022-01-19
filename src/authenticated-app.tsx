@@ -2,19 +2,39 @@ import React from "react";
 import { ProjectListScreen } from "./screens/project-list";
 import { useAuth } from "./context/auth-context";
 import styled from "@emotion/styled";
+import { Row } from "./components/lib";
+import { ReactComponent as SoftwareLogo } from "assets/software-logo.svg";
+import { Dropdown, Menu } from "antd";
 
 export const AuthenticatedApp = () => {
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
+  const menu = (
+    <Menu>
+      <Menu.Item key={"123"}>
+        <a href="" onClick={logout}>
+          登出{" "}
+        </a>
+      </Menu.Item>
+    </Menu>
+  );
   return (
     <Container>
-      <Header>
-        <HeaderLeft>
-          <h3>Logo</h3>
-          <h3>项目</h3>
-          <h3>用户</h3>
+      <Header between={true}>
+        <HeaderLeft gap={true}>
+          <SoftwareLogo width={"18rem"} color={"rgb(38,132,255)"} />
+          <h2>项目</h2>
+          <h2>用户</h2>
         </HeaderLeft>
         <HeaderRight>
-          <button onClick={logout}>登出</button>
+          <Dropdown overlay={menu}>
+            <a
+              className="ant-dropdown-link"
+              href={""}
+              onClick={(e) => e.preventDefault()}
+            >
+              hi {user?.name}
+            </a>
+          </Dropdown>
         </HeaderRight>
       </Header>
       <Main>
@@ -27,14 +47,12 @@ const Container = styled.div`
   display: grid;
   grid-template-rows: 6rem calc(100vh - 6rem);
 `;
-const Header = styled.header`
-  height: 6rem;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+const Header = styled(Row)`
+  padding: 3.2rem;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+  z-index: 1;
 `;
-const HeaderLeft = styled.div`
+const HeaderLeft = styled(Row)`
   display: flex;
   align-items: center;
 `;
