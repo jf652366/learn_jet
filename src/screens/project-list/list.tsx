@@ -1,11 +1,13 @@
 import { User } from "./search-panel";
 import { Table } from "antd";
+import dayjs from "dayjs";
 interface Project {
   id: string;
   name: string;
   personId: string;
   pin: boolean;
   organization: string;
+  created: number;
 }
 interface listProps {
   list: Project[];
@@ -22,6 +24,12 @@ export const List = ({ list, users }: listProps) => {
           sorter: (a, b) => a.name.localeCompare(b.name),
         },
         {
+          title: "部门",
+          dataIndex: "organization",
+          sorter: (a, b) => a.name.localeCompare(b.name),
+        },
+
+        {
           title: "负责人",
           render(value, project) {
             return (
@@ -32,8 +40,18 @@ export const List = ({ list, users }: listProps) => {
             );
           },
         },
+        {
+          title: "创建时间",
+          render(value, project) {
+            return (
+              <span>
+                {value.created ? dayjs(value.created).format("YYYY-MM-DD") : ""}
+              </span>
+            );
+          },
+        },
       ]}
       dataSource={list}
-    ></Table>
+    />
   );
 };
