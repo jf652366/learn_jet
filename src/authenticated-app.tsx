@@ -4,16 +4,16 @@ import { useAuth } from "./context/auth-context";
 import styled from "@emotion/styled";
 import { Row } from "./components/lib";
 import { ReactComponent as SoftwareLogo } from "assets/software-logo.svg";
-import { Dropdown, Menu } from "antd";
+import { Button, Dropdown, Menu } from "antd";
 
 export const AuthenticatedApp = () => {
   const { logout, user } = useAuth();
   const menu = (
     <Menu>
       <Menu.Item key={"123"}>
-        <a href="" onClick={logout}>
-          登出{" "}
-        </a>
+        <Button type={"link"} onClick={logout}>
+          登出
+        </Button>
       </Menu.Item>
     </Menu>
   );
@@ -27,13 +27,9 @@ export const AuthenticatedApp = () => {
         </HeaderLeft>
         <HeaderRight>
           <Dropdown overlay={menu}>
-            <a
-              className="ant-dropdown-link"
-              href={""}
-              onClick={(e) => e.preventDefault()}
-            >
+            <Button type={"link"} onClick={(e) => e.preventDefault()}>
               hi {user?.name}
-            </a>
+            </Button>
           </Dropdown>
         </HeaderRight>
       </Header>
