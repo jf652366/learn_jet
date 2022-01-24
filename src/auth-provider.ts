@@ -1,7 +1,7 @@
 import { User } from "./screens/project-list/search-panel";
 
 const apiUrl = process.env.REACT_APP_API_URL;
-
+console.log(apiUrl);
 let localStorageKey = "__auth_provider_token__";
 export const getToken = () => window.localStorage.getItem(localStorageKey);
 export const handleUserResponse = ({ user }: { user: User }) => {
@@ -25,6 +25,7 @@ export const login = (data: { username: string; password: string }) => {
   });
 };
 export const register = (data: { username: string; password: string }) => {
+  console.log(JSON.stringify(data), `${apiUrl}/register`);
   return fetch(`${apiUrl}/register`, {
     method: "POST",
     headers: {

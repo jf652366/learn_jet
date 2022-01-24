@@ -21,7 +21,7 @@ export const RegisterScreen = () => {
         name={"password"}
         rules={[{ required: true, message: "请输入密码" }]}
       >
-        <Input placeholder={"密码"} type="text" id="username" />
+        <Input placeholder={"密码"} type="text" id="password" />
       </Form.Item>
       <Form.Item>
         <LongButton type={"primary"} htmlType={"submit"}>
