@@ -33,9 +33,10 @@ export const useAsync = <D>(
   const setError = (error: Error) =>
     setState({
       data: null,
-      stat: "success",
+      stat: "error",
       error,
     });
+
   const run = (promise: Promise<D>) => {
     if (!promise || !promise.then) {
       throw new Error("请传入一个promise类型数据");

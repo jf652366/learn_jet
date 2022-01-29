@@ -10,11 +10,10 @@ export const LoginScreen = ({
 }) => {
   const { login } = useAuth();
   const { run, isLoading } = useAsync(undefined, { throwOnError: true });
-  const handleSubmit = async (values: {
-    username: string;
-    password: string;
-  }) => {
-    await run(login(values))
+  const handleSubmit = (values: { username: string; password: string }) => {
+    console.log(values);
+
+    run(login(values))
       .then()
       .catch((err) => onError(err));
   };

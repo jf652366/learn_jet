@@ -29,6 +29,7 @@ export const http = async (
       if (response.status === 401) {
         await auth.localOut();
         window.location.reload();
+        return Promise.reject({ message: "请重新登录" });
       }
       const data = await response.json();
       if (response.ok) {
