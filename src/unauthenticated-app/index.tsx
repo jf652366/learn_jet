@@ -6,9 +6,11 @@ import styled from "@emotion/styled";
 import logo from "assets/logo.svg";
 import left from "assets/left.svg";
 import right from "assets/right.svg";
+
 export const UnauthenticatedApp = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [error, setError] = useState<Error | null>(null);
+
   return (
     <Container>
       <Header />
