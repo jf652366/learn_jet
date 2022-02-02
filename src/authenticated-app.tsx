@@ -5,8 +5,28 @@ import styled from "@emotion/styled";
 import { Row } from "./components/lib";
 import { ReactComponent as SoftwareLogo } from "assets/software-logo.svg";
 import { Button, Dropdown, Menu } from "antd";
-
+import { Navigate, Route, Routes } from "react-router";
+import { ProjectScreen } from "./screens/project-screen";
+import { BrowserRouter as Router } from "react-router-dom";
 export const AuthenticatedApp = () => {
+  return (
+    <Container>
+      <PageHeader />
+      <Main>
+        <Router>
+          <Routes>
+            <Route path={"/projects"} element={<ProjectListScreen />} />
+            <Route
+              path={"/projects/:projectId/*"}
+              element={<ProjectScreen />}
+            />
+          </Routes>
+        </Router>
+      </Main>
+    </Container>
+  );
+};
+const PageHeader = () => {
   const { logout, user } = useAuth();
   const menu = (
     <Menu>
@@ -18,25 +38,20 @@ export const AuthenticatedApp = () => {
     </Menu>
   );
   return (
-    <Container>
-      <Header between={true}>
-        <HeaderLeft gap={true}>
-          <SoftwareLogo width={"18rem"} color={"rgb(38,132,255)"} />
-          <h2>项目</h2>
-          <h2>用户</h2>
-        </HeaderLeft>
-        <HeaderRight>
-          <Dropdown overlay={menu}>
-            <Button type={"link"} onClick={(e) => e.preventDefault()}>
-              hi {user?.name}
-            </Button>
-          </Dropdown>
-        </HeaderRight>
-      </Header>
-      <Main>
-        <ProjectListScreen />
-      </Main>
-    </Container>
+    <Header between={true}>
+      <HeaderLeft gap={true}>
+        <SoftwareLogo width={"18rem"} color={"rgb(38,132,255)"} />
+        <h2>项目</h2>
+        <h2>用户</h2>
+      </HeaderLeft>
+      <HeaderRight>
+        <Dropdown overlay={menu}>
+          <Button type={"link"} onClick={(e) => e.preventDefault()}>
+            hi {user?.name}
+          </Button>
+        </Dropdown>
+      </HeaderRight>
+    </Header>
   );
 };
 const Container = styled.div`
