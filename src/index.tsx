@@ -6,6 +6,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { loadServer, DevTools } from "jira-dev-tool";
 //必须在jira-dev-tool后引入
+import "./wdyr";
 import "antd/dist/antd.less";
 
 import { AppProvider } from "context";
