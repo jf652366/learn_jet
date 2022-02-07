@@ -8,7 +8,7 @@ import { loadServer, DevTools } from "jira-dev-tool";
 //必须在jira-dev-tool后引入
 import "antd/dist/antd.less";
 
-import { AppProvider } from "./context";
+import { AppProvider } from "context";
 loadServer(() =>
   ReactDOM.render(
     <React.StrictMode>
