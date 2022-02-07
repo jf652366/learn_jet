@@ -5,8 +5,31 @@ import styled from "@emotion/styled";
 import { Row } from "./components/lib";
 import { ReactComponent as SoftwareLogo } from "assets/software-logo.svg";
 import { Button, Dropdown, Menu } from "antd";
+import { Route, Routes } from "react-router";
+import { ProjectScreen } from "./screens/project-screen";
+import { BrowserRouter as Router } from "react-router-dom";
+import { resetRoute } from "./utils";
 
 export const AuthenticatedApp = () => {
+  return (
+    <Container>
+      <PageHeader />
+      <Main>
+        <Router>
+          <Routes>
+            <Route index element={<ProjectListScreen />} />
+            <Route path={"/projects"} element={<ProjectListScreen />} />
+            <Route
+              path={"/projects/:projectId/*"}
+              element={<ProjectScreen />}
+            />
+          </Routes>
+        </Router>
+      </Main>
+    </Container>
+  );
+};
+const PageHeader = () => {
   const { logout, user } = useAuth();
   const menu = (
     <Menu>
@@ -18,25 +41,23 @@ export const AuthenticatedApp = () => {
     </Menu>
   );
   return (
-    <Container>
-      <Header between={true}>
-        <HeaderLeft gap={true}>
+    <Header between={true}>
+      <HeaderLeft gap={true}>
+        <Button type={"link"} onClick={resetRoute}>
           <SoftwareLogo width={"18rem"} color={"rgb(38,132,255)"} />
-          <h2>项目</h2>
-          <h2>用户</h2>
-        </HeaderLeft>
-        <HeaderRight>
-          <Dropdown overlay={menu}>
-            <Button type={"link"} onClick={(e) => e.preventDefault()}>
-              hi {user?.name}
-            </Button>
-          </Dropdown>
-        </HeaderRight>
-      </Header>
-      <Main>
-        <ProjectListScreen />
-      </Main>
-    </Container>
+        </Button>
+
+        <h2>项目</h2>
+        <h2>用户</h2>
+      </HeaderLeft>
+      <HeaderRight>
+        <Dropdown overlay={menu}>
+          <Button type={"link"} onClick={(e) => e.preventDefault()}>
+            hi {user?.name}
+          </Button>
+        </Dropdown>
+      </HeaderRight>
+    </Header>
   );
 };
 const Container = styled.div`
