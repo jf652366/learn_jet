@@ -7,7 +7,6 @@ import { Typography } from "antd";
 import { useProject } from "../../utils/use-project";
 import { useUser } from "../../utils/use-user";
 import { useUrlQueryParam } from "../../utils/url";
-
 export const ProjectListScreen = () => {
   const [param, setParam] = useUrlQueryParam(["name", "personId"]);
   const debouncedParam = useDebounce(param, 200);
