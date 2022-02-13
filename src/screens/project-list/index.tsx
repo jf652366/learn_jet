@@ -6,21 +6,35 @@ import styled from "@emotion/styled";
 import { Typography } from "antd";
 import { useProject } from "../../utils/use-project";
 import { useUser } from "../../utils/use-user";
-import { useUrlQueryParam } from "../../utils/url";
+
+import { useProjectSearchParams } from "./util";
+import Button from "antd/es/button";
+
 export const ProjectListScreen = () => {
-  const [param, setParam] = useUrlQueryParam(["name", "personId"]);
-  const debouncedParam = useDebounce(param, 200);
-  const { isLoading, error, data: list } = useProject(debouncedParam);
-  const { data: users } = useUser();
   useDocumentTitle("项目列表", false);
+  const [param, setParam] = useProjectSearchParams();
+  const {
+    isLoading,
+    error,
+    data: list,
+    retry,
+  } = useProject(useDebounce(param, 200));
+  const { data: users } = useUser();
+
   return (
     <Container>
       <h2>项目列表</h2>
+      <button onClick={retry}>hello</button>
       <SearchPanel users={users || []} param={param} setParam={setParam} />
       {error ? (
         <Typography.Text type={"danger"}>{error.message}</Typography.Text>
       ) : null}
-      <List loading={isLoading} users={users || []} dataSource={list || []} />
+      <List
+        refresh={retry}
+        loading={isLoading}
+        users={users || []}
+        dataSource={list || []}
+      />
     </Container>
   );
 };
