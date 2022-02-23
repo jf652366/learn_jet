@@ -8,7 +8,6 @@ import { useProject } from "../../utils/use-project";
 import { useUser } from "../../utils/use-user";
 
 import { useProjectSearchParams } from "./util";
-import Button from "antd/es/button";
 
 export const ProjectListScreen = () => {
   useDocumentTitle("项目列表", false);
@@ -24,7 +23,7 @@ export const ProjectListScreen = () => {
   return (
     <Container>
       <h2>项目列表</h2>
-      <button onClick={retry}>hello</button>
+
       <SearchPanel users={users || []} param={param} setParam={setParam} />
       {error ? (
         <Typography.Text type={"danger"}>{error.message}</Typography.Text>
