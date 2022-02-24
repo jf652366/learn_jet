@@ -3,16 +3,16 @@
  * */
 import { URLSearchParamsInit, useSearchParams } from "react-router-dom";
 import { useMemo } from "react";
-import { cleanObject } from "./index";
+import { cleanObject, subset } from "./index";
 
 export const useUrlQueryParam = <K extends string>(keys: K[]) => {
   const [SearchParams, setSearchParams] = useSearchParams();
   return [
     useMemo(
       () =>
-        keys.reduce((prev, key) => {
-          return { ...prev, [key]: SearchParams.get(key) || "" };
-        }, {} as { [key in K]: string }),
+        subset(Object.fromEntries(SearchParams), keys) as {
+          [key in K]: string;
+        },
       [SearchParams]
     ),
     (Params: Partial<{ [key in K]: unknown }>) => {
