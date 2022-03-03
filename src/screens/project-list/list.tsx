@@ -7,6 +7,8 @@ import { Pin } from "../../components/pin";
 
 import { useEditProject } from "../../utils/use-project";
 import { ButtonNoPadding } from "../../components/lib";
+import { useDispatch } from "react-redux";
+import { ProjectListActions } from "./project-list.slice";
 
 export interface Project {
   id: number;
@@ -20,11 +22,12 @@ export interface Project {
 interface listProps extends TableProps<Project> {
   users: User[];
   refresh?: () => void;
-  setProjectModalOpen: (isOpen: boolean) => void;
+  projectButton: JSX.Element;
 }
 
 export const List = ({ users, ...props }: listProps) => {
   const { mutate } = useEditProject();
+  const dispatch = useDispatch();
   const PinProject = (id: number) => (pin: boolean) =>
     mutate({ id, pin }).then(props.refresh);
   return (
@@ -88,7 +91,9 @@ export const List = ({ users, ...props }: listProps) => {
                     <Menu.Item key={"edit"}>
                       <ButtonNoPadding
                         type={"link"}
-                        onClick={() => props.setProjectModalOpen(true)}
+                        onClick={() =>
+                          dispatch(ProjectListActions.openProjectModal())
+                        }
                       >
                         编辑
                       </ButtonNoPadding>
