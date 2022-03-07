@@ -4,45 +4,31 @@ import { List } from "./list";
 import { useDebounce, useDocumentTitle } from "../../utils";
 import styled from "@emotion/styled";
 import { Button, Typography } from "antd";
-import { useProject } from "../../utils/use-project";
+import { useProjects } from "../../utils/use-project";
 import { useUser } from "../../utils/use-user";
 
-import { useProjectSearchParams } from "./util";
-import { Row } from "../../components/lib";
+import { useProjectModel, useProjectSearchParams } from "./util";
+import { ButtonNoPadding, ErrorBox, Row } from "../../components/lib";
 
-export const ProjectListScreen = (props: {
-  setProjectModalOpen: (isOpen: boolean) => void;
-}) => {
+export const ProjectListScreen = () => {
   useDocumentTitle("项目列表", false);
   const [param, setParam] = useProjectSearchParams();
-  const {
-    isLoading,
-    error,
-    data: list,
-    retry,
-  } = useProject(useDebounce(param, 200));
+  const { isLoading, error, data: list } = useProjects(useDebounce(param, 200));
   const { data: users } = useUser();
-
+  const { open } = useProjectModel();
   return (
     <Container>
       <Row between={true}>
         <h1>项目列表</h1>
-        <Button onClick={() => props.setProjectModalOpen(true)}>
+        <ButtonNoPadding type={"link"} onClick={open}>
           创建项目
-        </Button>
+        </ButtonNoPadding>
       </Row>
 
       <SearchPanel users={users || []} param={param} setParam={setParam} />
-      {error ? (
-        <Typography.Text type={"danger"}>{error.message}</Typography.Text>
-      ) : null}
-      <List
-        setProjectModalOpen={props.setProjectModalOpen}
-        refresh={retry}
-        loading={isLoading}
-        users={users || []}
-        dataSource={list || []}
-      />
+      <ErrorBox error={error} />
+
+      <List loading={isLoading} users={users || []} dataSource={list || []} />
     </Container>
   );
 };

@@ -7,6 +7,7 @@ import { Pin } from "../../components/pin";
 
 import { useEditProject } from "../../utils/use-project";
 import { ButtonNoPadding } from "../../components/lib";
+import { useProjectModel } from "./util";
 
 export interface Project {
   id: number;
@@ -19,14 +20,13 @@ export interface Project {
 
 interface listProps extends TableProps<Project> {
   users: User[];
-  refresh?: () => void;
-  setProjectModalOpen: (isOpen: boolean) => void;
 }
 
 export const List = ({ users, ...props }: listProps) => {
   const { mutate } = useEditProject();
-  const PinProject = (id: number) => (pin: boolean) =>
-    mutate({ id, pin }).then(props.refresh);
+  const PinProject = (id: number) => (pin: boolean) => mutate({ id, pin });
+  const editProject = (id: number) => () => startEdit(id);
+  const { startEdit } = useProjectModel();
   return (
     <Table
       pagination={false}
@@ -88,9 +88,14 @@ export const List = ({ users, ...props }: listProps) => {
                     <Menu.Item key={"edit"}>
                       <ButtonNoPadding
                         type={"link"}
-                        onClick={() => props.setProjectModalOpen(true)}
+                        onClick={editProject(project.id)}
                       >
                         编辑
+                      </ButtonNoPadding>
+                    </Menu.Item>
+                    <Menu.Item key={"delete"}>
+                      <ButtonNoPadding type={"link"} onClick={() => {}}>
+                        删除
                       </ButtonNoPadding>
                     </Menu.Item>
                   </Menu>

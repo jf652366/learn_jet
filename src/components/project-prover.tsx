@@ -1,13 +1,13 @@
 import { Button, Divider, List, Popover, Typography } from "antd";
-import { useProject } from "../utils/use-project";
+import { useProjects } from "../utils/use-project";
 import styled from "@emotion/styled";
 import { ButtonNoPadding } from "./lib";
+import { useProjectModel } from "../screens/project-list/util";
 
-export const ProjectProver = (props: {
-  setProjectModalOpen: (isOpen: boolean) => void;
-}) => {
-  const { data: Projects } = useProject();
+export const ProjectProver = () => {
+  const { data: Projects } = useProjects();
   const pinnedProjects = Projects?.filter((projects) => projects.pin);
+  const { open } = useProjectModel();
   const Content = (
     <Contentcontainer>
       <Typography.Text type={"secondary"}>搜藏项目</Typography.Text>
@@ -19,10 +19,7 @@ export const ProjectProver = (props: {
         ))}
       </List>
       <Divider />
-      <ButtonNoPadding
-        type={"link"}
-        onClick={() => props.setProjectModalOpen(true)}
-      >
+      <ButtonNoPadding type={"link"} onClick={open}>
         创建项目
       </ButtonNoPadding>
     </Contentcontainer>
