@@ -1,4 +1,4 @@
-import { useUrlQueryParam } from "../../utils/url";
+import { useSetUrlSearchParam, useUrlQueryParam } from "../../utils/url";
 import { useMemo } from "react";
 import { useProject } from "../../utils/use-project";
 //项目列表搜索参数
@@ -35,12 +35,9 @@ export const useProjectModel = () => {
   //     setProjectCreate({projectCreate: false});
   //     setEditingProjectId({editingProjectId: undefined})
   // }
-  const close = () => {
-    setProjectCreate({ projectCreate: undefined });
-    if (editingProjectId) {
-      setEditingProjectId({ editingProjectId: undefined });
-    }
-  };
+
+  const setUrlParams = useSetUrlSearchParam();
+  const close = () => setUrlParams({ projectCreate: "", editingProjectId: "" });
   //
   const startEdit = (id: number) =>
     setEditingProjectId({
@@ -48,7 +45,7 @@ export const useProjectModel = () => {
     });
 
   return {
-    projectModalOpen: projectCreate === "true" || !!editingProjectId,
+    projectModalOpen: projectCreate === "true" || Boolean(editingProjectId),
     open,
     close,
     isLoading,

@@ -1,15 +1,17 @@
 import React, { ReactNode, useState, useContext } from "react";
 import * as auth from "auth-provider";
-import { User } from "screens/project-list/search-panel";
 import { http } from "../utils/http";
 import { useMount } from "../utils";
 import { useAsync } from "../utils/use-async";
 import { FullPageErrorFallback, FullPageLoading } from "../components/lib";
+import { useQueryClient } from "react-query";
+import { User } from "../type/user";
 
 interface AuthForm {
   username: string;
   password: string;
 }
+
 const AuthContext = React.createContext<
   | {
       user: User | null;
@@ -41,9 +43,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     run,
     setData: setUser,
   } = useAsync<User | null>();
+  const queryClient = useQueryClient();
   const login = (form: AuthForm) => auth.login(form).then(setUser);
   const register = (form: AuthForm) => auth.register(form).then(setUser);
-  const logout = () => auth.localOut().then(() => setUser(null));
+  const logout = () =>
+    auth.localOut().then(() => {
+      setUser(null);
+      queryClient.clear();
+    });
   useMount(() => {
     run(initUser());
   });

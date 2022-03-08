@@ -1,6 +1,6 @@
 //乐观更新封装
 import { QueryKey, useQueryClient } from "react-query";
-import { Project } from "../screens/project-list/list";
+import { Project } from "../type/project";
 
 export const useConfig = (
   queryKey: QueryKey,

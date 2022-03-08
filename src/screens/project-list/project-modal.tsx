@@ -24,6 +24,10 @@ export const ProjectModal = () => {
       close();
     });
   };
+  const closeModal = () => {
+    form.resetFields();
+    close();
+  };
   useEffect(() => {
     form.setFieldsValue(editingProject);
   }, [form, editingProject]);
@@ -31,7 +35,7 @@ export const ProjectModal = () => {
   const title = editingProject ? "编辑项目" : "创建项目";
   return (
     <Drawer
-      onClose={close}
+      onClose={closeModal}
       width={"100%"}
       visible={projectModalOpen}
       forceRender={true}

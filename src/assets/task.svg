@@ -1,19 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg"
-     xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
-    <!-- Generator: Sketch 3.5.2 (25235) - http://www.bohemiancoding.com/sketch -->
-    <title>task</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
-        <g id="task" sketch:type="MSArtboardGroup">
-            <g id="Task" sketch:type="MSLayerGroup" transform="translate(1.000000, 1.000000)">
-                <rect id="Rectangle-36" fill="#4BADE8" sketch:type="MSShapeGroup" x="0" y="0" width="14" height="14" rx="2"></rect>
-                <g id="Page-1" transform="translate(4.000000, 4.500000)" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" sketch:type="MSShapeGroup">
-                    <path d="M2,5 L6,0" id="Stroke-1"></path>
-                    <path d="M2,5 L0,3" id="Stroke-3"></path>
-                </g>
-            </g>
-        </g>
-    </g>
+<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+        "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg t="1646662659753" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4955"
+     xmlns:xlink="http://www.w3.org/1999/xlink" width="14" height="14">
+    <defs>
+        <style type="text/css"></style>
+    </defs>
+    <path d="M921.6 102.4H716.8V51.2c0-28.2-23-51.2-51.2-51.2H358.4c-28.2 0-51.2 23-51.2 51.2v51.2H102.4C46.1 102.4 0 148.5 0 204.8v716.8C0 977.9 46.1 1024 102.4 1024h819.2c56.3 0 102.4-46.1 102.4-102.4V204.8c0-56.3-46.1-102.4-102.4-102.4z m-51.2 716.8c0 28.2-23 51.2-51.2 51.2H204.8c-28.2 0-51.2-23-51.2-51.2V614.4h716.8v204.8z"
+          fill="#00a2ff" p-id="4956"></path>
 </svg>

@@ -1,8 +1,8 @@
-import { User } from "../screens/project-list/search-panel";
 import { useAsync } from "./use-async";
 import { useEffect } from "react";
 
 import { useHttp } from "./http";
+import { User } from "../type/user";
 
 export const useUser = (param?: Partial<User>) => {
   const { run, ...result } = useAsync<User[]>();

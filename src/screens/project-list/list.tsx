@@ -1,4 +1,3 @@
-import { User } from "./search-panel";
 import { Dropdown, Menu, Modal, Table } from "antd";
 import dayjs from "dayjs";
 import { TableProps } from "antd/es";
@@ -8,15 +7,8 @@ import { Pin } from "../../components/pin";
 import { useDeleteProject, useEditProject } from "../../utils/use-project";
 import { ButtonNoPadding } from "../../components/lib";
 import { useProjectModel, useProjectQueryKey } from "./util";
-
-export interface Project {
-  id: number;
-  name: string;
-  personId: number;
-  pin: boolean;
-  organization: string;
-  created: number;
-}
+import { Project } from "../../type/project";
+import { User } from "../../type/user";
 
 interface listProps extends TableProps<Project> {
   users: User[];

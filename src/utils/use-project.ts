@@ -1,19 +1,18 @@
-import { Project } from "../screens/project-list/list";
 import { useHttp } from "./http";
-import { QueryKey, useMutation, useQuery, useQueryClient } from "react-query";
-import { useProjectSearchParams } from "../screens/project-list/util";
+import { QueryKey, useMutation, useQuery } from "react-query";
 import {
   useAddConfig,
   useDeleteConfig,
   useEditConfig,
 } from "./use-optimistic-options";
+import { Project } from "../type/project";
 
 export const useProjects = (param?: Partial<Project>) => {
   const client = useHttp();
   /*   ['projects',param],'projects' 可以2种方式传递
-       1 相当于 useEffect 第一个参数 为存储时的键 第二个参数为依赖项目
-       2  直接传递字符串  指定存储键值为当前字符串
-       */
+         1 相当于 useEffect 第一个参数 为存储时的键 第二个参数为依赖项目
+         2  直接传递字符串  指定存储键值为当前字符串
+         */
   return useQuery<Project[]>(["projects", param], () =>
     client("projects", {
       data: param,
