@@ -17,7 +17,7 @@ export const SearchPanel = () => {
     });
   };
   return (
-    <Row marginBottom={10} gap={true}>
+    <Row style={{ marginBottom: " 2rem " }} marginBottom={10} gap={true}>
       <Input
         style={{ width: "20rem" }}
         placeholder={"人物名"}
@@ -38,7 +38,7 @@ export const SearchPanel = () => {
           })
         }
       />
-      <Button onClick={reset}>清楚筛选器</Button>
+      <Button onClick={reset}>清除筛选器</Button>
     </Row>
   );
 };
