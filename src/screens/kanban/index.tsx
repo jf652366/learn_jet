@@ -13,6 +13,8 @@ import { useTasks } from "../../utils/task";
 import { Spin } from "antd";
 import { CreateKanban } from "./create-kanban";
 import { TaskModel } from "./task-model";
+import { DragDropContext } from "react-beautiful-dnd";
+import { Drag, Drop, DropChild } from "../../components/drag-and-drop";
 
 export const KanbanScreen = () => {
   useDocumentTitle("看板列表");
@@ -23,24 +25,41 @@ export const KanbanScreen = () => {
   const { isLoading: taskIsLoading } = useTasks(useTasksSearchParams());
   const isLoading = taskIsLoading || kanbanIsLoading;
   return (
-    <ScreenContainer>
-      <h1> {currentProject?.name}看板</h1>
-      <SearchPanel />
-      {isLoading ? (
-        <Spin size={"large"} />
-      ) : (
-        <ColumnsContainer>
-          {kanban?.map((kanban) => (
-            <KanbanColumn key={kanban.id} kanban={kanban} />
-          ))}
-          <CreateKanban />
-        </ColumnsContainer>
-      )}
-      <TaskModel />
-    </ScreenContainer>
+    <DragDropContext onDragEnd={() => {}}>
+      <ScreenContainer>
+        <h1> {currentProject?.name}看板</h1>
+        <SearchPanel />
+        {isLoading ? (
+          <Spin size={"large"} />
+        ) : (
+          <ColumnsContainer>
+            <Drop
+              type={"COLUMN"}
+              direction={"horizontal"}
+              droppableId={"kanban"}
+            >
+              <DropChild style={{ display: "flex" }}>
+                {kanban?.map((kanban, index) => (
+                  <Drag
+                    key={kanban.id}
+                    index={index}
+                    draggableId={"kanban" + kanban.id}
+                  >
+                    <KanbanColumn key={kanban.id} kanban={kanban} />
+                  </Drag>
+                ))}
+              </DropChild>
+            </Drop>
+
+            <CreateKanban />
+          </ColumnsContainer>
+        )}
+        <TaskModel />
+      </ScreenContainer>
+    </DragDropContext>
   );
 };
-const ColumnsContainer = styled.div`
+const ColumnsContainer = styled("div")`
   display: flex;
   overflow-x: scroll;
   flex: 1;

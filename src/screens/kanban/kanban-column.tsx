@@ -16,6 +16,7 @@ import { Mark } from "../../components/mark";
 import { useDeleteKanban } from "../../utils/kanban";
 import { Row } from "../../components/lib";
 import React from "react";
+import { Drag, Drop, DropChild } from "../../components/drag-and-drop";
 
 const TaskTypeIcon = ({ id }: { id: number }) => {
   const { data: taskType } = useTasksType();
@@ -56,9 +57,21 @@ export const KanbanColumn = React.forwardRef<
         <More key={kanban.id} kanban={kanban} />
       </Row>
       <TaskContainer>
-        {task?.map((task) => (
-          <TaskCard key={task.id} task={task} />
-        ))}
+        <Drop
+          droppableId={"task" + kanban.id}
+          type={"ROW"}
+          direction={"vertical"}
+        >
+          <DropChild>
+            {task?.map((task, index) => (
+              <Drag draggableId={"task" + task.id} key={task.id} index={index}>
+                <div>
+                  <TaskCard key={task.id} task={task} />
+                </div>
+              </Drag>
+            ))}
+          </DropChild>
+        </Drop>
         <CreateTask kanbanId={kanban.id} />
       </TaskContainer>
     </Container>
@@ -78,7 +91,7 @@ const More = ({ kanban }: { kanban: Kanban }) => {
   };
   const overlay = (
     <Menu>
-      <Menu.Item>
+      <Menu.Item key={"hell"}>
         <Button type={"link"} onClick={startEdit}>
           删除
         </Button>
