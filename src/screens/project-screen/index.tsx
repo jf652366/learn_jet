@@ -14,7 +14,7 @@ const useRouteType = () => {
 export const ProjectScreen = () => {
   const routeType = useRouteType();
   return (
-    <Containal>
+    <Container>
       <Aside>
         <Menu mode={"inline"} selectedKeys={[routeType]}>
           <Menu.Item key={"kanban"}>
@@ -32,7 +32,7 @@ export const ProjectScreen = () => {
           <Route path={"epic"} element={<EpicScreen />} />
         </Routes>
       </Main>
-    </Containal>
+    </Container>
   );
 };
 
@@ -43,8 +43,10 @@ const Aside = styled.aside`
 const Main = styled.div`
   box-shadow: -5px 0 5px -5px rgba(0, 0, 0, 0.1);
   display: flex;
+  overflow: hidden;
 `;
-const Containal = styled.div`
+const Container = styled.div`
   display: grid;
   grid-template-columns: 16rem 1fr;
+  overflow: hidden;
 `;

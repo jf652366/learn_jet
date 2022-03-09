@@ -20,7 +20,7 @@ export const SearchPanel = () => {
     <Row style={{ marginBottom: " 2rem " }} marginBottom={10} gap={true}>
       <Input
         style={{ width: "20rem" }}
-        placeholder={"人物名"}
+        placeholder={"任务名"}
         value={searchParams.name}
         onChange={(event) => setSearchParams({ name: event.target.value })}
       />
