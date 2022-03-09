@@ -15,6 +15,7 @@ import { Task } from "../../type/task";
 import { Mark } from "../../components/mark";
 import { useDeleteKanban } from "../../utils/kanban";
 import { Row } from "../../components/lib";
+import React from "react";
 
 const TaskTypeIcon = ({ id }: { id: number }) => {
   const { data: taskType } = useTasksType();
@@ -41,25 +42,28 @@ const TaskCard = ({ task }: { task: Task }) => {
     </Card>
   );
 };
-export const KanbanColumn = ({ kanban }: { kanban: Kanban }) => {
+export const KanbanColumn = React.forwardRef<
+  HTMLDivElement,
+  { kanban: Kanban }
+>(({ kanban, ...props }, ref) => {
   const { data: allTasks } = useTasks(useTasksSearchParams());
   const task = allTasks?.filter((task) => task.kanbanId === kanban.id);
 
   return (
-    <Container>
+    <Container {...props} ref={ref}>
       <Row between={true}>
         <h3>{kanban.name}</h3>
-        <More kanban={kanban} />
+        <More key={kanban.id} kanban={kanban} />
       </Row>
       <TaskContainer>
         {task?.map((task) => (
-          <TaskCard task={task} />
+          <TaskCard key={task.id} task={task} />
         ))}
         <CreateTask kanbanId={kanban.id} />
       </TaskContainer>
     </Container>
   );
-};
+});
 const More = ({ kanban }: { kanban: Kanban }) => {
   const { mutateAsync } = useDeleteKanban(useKanbansQueryKey());
   const startEdit = () => {
